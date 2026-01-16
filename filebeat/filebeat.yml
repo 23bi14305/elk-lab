@@ -1,0 +1,19 @@
+filebeat.inputs:
+  - type: filestream
+    id: dvwa-apache
+    enabled: true
+    paths:
+      - /var/log/apache2/access.log
+      - /var/log/apache2/error.log
+
+output.logstash:
+  hosts: ["logstash:5044"]
+
+logging:
+  level: info
+  to_files: true
+  files:
+    path: /usr/share/filebeat/logs
+    name: filebeat
+    keepfiles: 7
+    permissions: 0644
